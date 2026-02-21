@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soujan Wuluvrna | AI/ML Engineer</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        dark: '#0B1120',
+                        darker: '#080c16',
+                        accent: '#38bdf8', // Light blue
+                        accentDark: '#0284c7',
+                        card: '#1e293b'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['Fira Code', 'monospace'],
+                    },
+                    animation: {
+                        'blob': 'blob 7s infinite',
+                        'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
+                    },
+                    keyframes: {
+                        blob: {
+                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
+                            '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+                            '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+                            '100%': { transform: 'translate(0px, 0px) scale(1)' },
+                        },
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            background-color: #0B1120;
+            color: #f8fafc;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0B1120;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #334155;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #475569;
+        }
+        
+        .glass {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .gradient-text {
+            background: linear-gradient(to right, #38bdf8, #818cf8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+
+    <!-- React & ReactDOM -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <!-- Babel -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body class="antialiased selection:bg-accent selection:text-white">
+    <div id="root"></div>
+
+    <script type="text/babel">
+        // SVG Icons
+        const MailIcon = () => <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>;
+        const PhoneIcon = () => <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="14" height="20" x="5" y="2" rx="2" ry="2"/><path d="M12 18h.01"/></svg>;
+        const LinkedinIcon = () => <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>;
+        const GithubIcon = () => <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>;
+        const ExternalLinkIcon = () => <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" x2="21" y1="14" y2="3"/></svg>;
+        const MapPinIcon = () => <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>;
+        const CodeIcon = () => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>;
+
+        const App = () => {
+            const skills = {
+                "Languages & Data": ["Python", "R", "Java", "SQL", "C++", "Pandas", "NumPy", "Dask", "Polars"],
+                "Machine Learning & AI": ["PyTorch", "TensorFlow", "Keras", "Scikit-learn", "XGBoost", "LightGBM", "Time-Series (ARIMA/LSTM)", "Reinforcement Learning"],
+                "Deep Learning & GenAI": ["Transformers", "GPT/BERT", "Hugging Face", "LangChain", "RAG", "FAISS/Pinecone/Milvus", "Diffusion Models", "Multimodal AI"],
+                "Computer Vision": ["OpenCV", "Object Detection (YOLO, Faster R-CNN)", "Image Augmentation", "OCR"],
+                "Big Data & MLOps": ["Apache Spark", "Kafka", "AWS (SageMaker, Lambda)", "Airflow", "Docker", "Databricks", "FastAPI", "MLflow"]
+            };
+
+            const projects = [
+                {
+                    title: "Real-Time Transaction Fraud Detection Engine",
+                    desc: "Built a high-throughput hybrid AI system (boosted-trees + deep learning) for scoring streaming transactions. Achieved sub-second inference, reduced false positives by >18%, and implemented SHAP explainability for regulatory audits.",
+                    tags: ["PyTorch", "XGBoost", "Spark Streaming", "Kafka", "FastAPI", "AWS", "SHAP"],
+                    link: "#",
+                    github: "#"
+                },
+                {
+                    title: "Intelligent Retail Analytics Platform",
+                    desc: "Developed an end-to-end CV platform at Infinite Infolab for shelf monitoring. Trained YOLOv5/EfficientNet models, improving accuracy by 22%. Automated ETL pipelines reduced preprocessing time by 40%.",
+                    tags: ["YOLOv5", "Airflow", "Docker", "Power BI", "Computer Vision"],
+                    link: "#",
+                    github: "#"
+                },
+                {
+                    title: "E-commerce Churn Analysis & ML Pipeline",
+                    desc: "Analyzed data from 50k+ users to predict churn triggers (service friction, Gen-Z behavior). Built a predictive model and ROI framework projecting ~$1.6M in retained value via targeted interventions.",
+                    tags: ["Python", "Machine Learning", "A/B Testing", "EDA", "Statistical Modeling"],
+                    link: "#",
+                    github: "#"
+                },
+                {
+                    title: "Responsible AI Content Moderation System",
+                    desc: "Designed a comprehensive moderation architecture to detect inappropriate/racial content. Focused on bias mitigation, transparency, and ethical AI principles balancing safety with user privacy.",
+                    tags: ["Responsible AI", "System Design", "Ethics", "Content Moderation"],
+                    link: "#",
+                    github: "#"
+                }
+            ];
+
+            return (
+                <div className="min-h-screen">
+                    {/* Navigation */}
+                    <nav className="fixed w-full z-50 glass border-b-0 border-slate-800">
+                        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                            <div className="flex items-center justify-between h-16">
+                                <div className="flex-shrink-0">
+                                    <a href="#" className="font-mono text-xl font-bold tracking-tighter">
+                                        <span className="text-accent">&lt;</span>Soujan<span className="text-accent">/&gt;</span>
+                                    </a>
+                                </div>
+                                <div className="hidden md:block">
+                                    <div className="ml-10 flex items-baseline space-x-8">
+                                        <a href="#about" className="hover:text-accent transition-colors px-3 py-2 rounded-md text-sm font-medium">About</a>
+                                        <a href="#skills" className="hover:text-accent transition-colors px-3 py-2 rounded-md text-sm font-medium">Skills</a>
+                                        <a href="#projects" className="hover:text-accent transition-colors px-3 py-2 rounded-md text-sm font-medium">Projects</a>
+                                        <a href="#contact" className="bg-accent/10 text-accent hover:bg-accent hover:text-dark transition-all px-4 py-2 rounded-full text-sm font-medium border border-accent/20">Resume</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </nav>
+
+                    {/* Hero Section */}
+                    <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
+                        {/* Background Blobs */}
+                        <div className="absolute top-0 left-1/4 w-96 h-96 bg-accent/20 rounded-full mix-blend-screen filter blur-[100px] animate-blob"></div>
+                        <div className="absolute top-0 right-1/4 w-96 h-96 bg-purple-500/20 rounded-full mix-blend-screen filter blur-[100px] animate-blob animation-delay-2000"></div>
+                        
+                        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                            <div className="flex flex-col-reverse lg:flex-row items-center justify-between gap-12">
+                                <div className="flex-1 text-center lg:text-left animate-fade-in-up">
+                                    <p className="font-mono text-accent mb-4 tracking-wide">Hi, my name is</p>
+                                    <h1 className="text-5xl lg:text-7xl font-bold tracking-tight mb-4 text-slate-100">
+                                        Soujan Wuluvrna.
+                                    </h1>
+                                    <h2 className="text-3xl lg:text-5xl font-bold text-slate-400 mb-6">
+                                        I engineer <span className="gradient-text">intelligent systems.</span>
+                                    </h2>
+                                    <p className="text-slate-400 text-lg max-w-2xl mx-auto lg:mx-0 mb-8 leading-relaxed">
+                                        AI/ML Engineer with 3+ years of experience building and deploying production-grade machine learning systems. I specialize in fraud detection, computer vision, time-series forecasting, and scalable MLOps architectures.
+                                    </p>
+                                    
+                                    <div className="flex flex-col sm:flex-row items-center gap-4 justify-center lg:justify-start">
+                                        <a href="#projects" className="px-8 py-3 bg-accent text-dark font-semibold rounded-full hover:bg-accent/90 transition-all shadow-[0_0_20px_rgba(56,189,248,0.3)]">
+                                            View Projects
+                                        </a>
+                                        <a href="mailto:soujan.d@jobmailoffer.com" className="px-8 py-3 glass text-slate-200 font-semibold rounded-full hover:bg-slate-800 transition-all flex items-center gap-2">
+                                            <MailIcon /> Contact Me
+                                        </a>
+                                    </div>
+                                    
+                                    <div className="mt-10 flex items-center justify-center lg:justify-start gap-6 text-slate-400">
+                                        <a href="#" className="hover:text-accent transition-colors" title="LinkedIn"><LinkedinIcon /></a>
+                                        <a href="#" className="hover:text-accent transition-colors" title="GitHub"><GithubIcon /></a>
+                                        <div className="flex items-center gap-2 text-sm">
+                                            <MapPinIcon />
+                                            <span>Long Beach, CA</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div className="flex-1 max-w-sm lg:max-w-md animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
+                                    <div className="relative group">
+                                        <div className="absolute inset-0 bg-gradient-to-tr from-accent to-purple-500 rounded-2xl transform rotate-3 group-hover:rotate-6 transition-transform duration-300 opacity-50"></div>
+                                        <img 
+                                            src="Soujan-Pic.jpg" 
+                                            alt="Soujan Wuluvrna" 
+                                            className="relative rounded-2xl border border-slate-700/50 shadow-2xl object-cover w-full aspect-square grayscale-[20%] group-hover:grayscale-0 transition-all duration-300"
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    {/* About & Education */}
+                    <section id="about" className="py-20 bg-darker/50">
+                        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                            <h2 className="text-3xl font-bold mb-12 flex items-center gap-4">
+                                <span className="font-mono text-accent text-xl">01.</span> About Me
+                                <div className="h-px bg-slate-700 flex-1 ml-4"></div>
+                            </h2>
+                            
+                            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                                <div className="text-slate-400 space-y-4 leading-relaxed">
+                                    <p>
+                                        I am a highly motivated AI/ML Engineer who thrives at the intersection of data science and software engineering. My background includes designing robust, automated ML pipelines on AWS, building real-time anomaly-detection systems using Kafka and Spark, and implementing complex RAG-based search architectures.
+                                    </p>
+                                    <p>
+                                        In my recent roles, I've delivered end-to-end production models—from training YOLOv5 object detection algorithms that improved accuracy by 22% in retail environments, to deploying highly scalable fraud detection engines capable of sub-second inference.
+                                    </p>
+                                    <p>
+                                        When I'm not writing code or tuning hyperparameters, you can find me indulging in my hobbies: <span className="text-slate-200">Fashion modelling, Travelling, watching Anime, and playing Video Games</span>.
+                                    </p>
+                                </div>
+                                
+                                <div>
+                                    <h3 className="text-xl font-semibold mb-6 text-slate-200">Education & Certifications</h3>
+                                    <div className="space-y-6">
+                                        <div className="glass p-5 rounded-xl border-l-4 border-l-accent relative overflow-hidden group">
+                                            <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity"><CodeIcon /></div>
+                                            <h4 className="text-lg font-bold text-slate-100">Master of Science in Information Systems</h4>
+                                            <p className="text-accent font-mono text-sm mb-2">California State University, Long Beach, CA</p>
+                                            <p className="text-slate-400 text-sm">Graduation: May 2025</p>
+                                        </div>
+                                        <div className="glass p-5 rounded-xl border-l-4 border-l-purple-500 relative overflow-hidden group">
+                                            <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity"><CodeIcon /></div>
+                                            <h4 className="text-lg font-bold text-slate-100">Bachelor of Technology in Computer Science</h4>
+                                            <p className="text-purple-400 font-mono text-sm mb-2">Dayananda Sagar University</p>
+                                            <p className="text-slate-400 text-sm">Graduated: May 2023</p>
+                                        </div>
+                                        
+                                        <div className="pt-4">
+                                            <p className="text-sm font-mono text-slate-500 mb-3">Certifications:</p>
+                                            <ul className="text-slate-400 text-sm space-y-2 list-disc list-inside">
+                                                <li>AWS Academy Graduate - Machine Learning Foundations</li>
+                                                <li>Oracle AI Certification - Certified AI Foundations Associate</li>
+                                                <li>Python for Data Science, AI & Development</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    {/* Skills Section */}
+                    <section id="skills" className="py-20">
+                        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                            <h2 className="text-3xl font-bold mb-12 flex items-center gap-4">
+                                <span className="font-mono text-accent text-xl">02.</span> Technical Arsenal
+                                <div className="h-px bg-slate-700 flex-1 ml-4"></div>
+                            </h2>
+                            
+                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                                {Object.entries(skills).map(([category, items], idx) => (
+                                    <div key={idx} className="glass p-6 rounded-2xl hover:-translate-y-1 transition-transform duration-300">
+                                        <h3 className="text-lg font-semibold text-slate-200 mb-4 font-mono">{category}</h3>
+                                        <div className="flex flex-wrap gap-2">
+                                            {items.map((skill, i) => (
+                                                <span key={i} className="px-3 py-1 bg-slate-800 text-accent/90 text-sm rounded-full border border-slate-700">
+                                                    {skill}
+                                                </span>
+                                            ))}
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </section>
+
+                    {/* Projects Section */}
+                    <section id="projects" className="py-20 bg-darker/50">
+                        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                            <h2 className="text-3xl font-bold mb-12 flex items-center gap-4">
+                                <span className="font-mono text-accent text-xl">03.</span> Featured Work
+                                <div className="h-px bg-slate-700 flex-1 ml-4"></div>
+                            </h2>
+                            
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                                {projects.map((project, idx) => (
+                                    <div key={idx} className="glass rounded-2xl p-8 flex flex-col h-full group hover:border-accent/50 transition-colors duration-300 relative overflow-hidden">
+                                        <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-accent to-purple-500 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-500"></div>
+                                        
+                                        <div className="flex justify-between items-start mb-6">
+                                            <div className="text-accent bg-accent/10 p-3 rounded-xl">
+                                                <CodeIcon />
+                                            </div>
+                                            <div className="flex gap-4">
+                                                <a href={project.github} className="text-slate-400 hover:text-accent transition-colors"><GithubIcon /></a>
+                                                <a href={project.link} className="text-slate-400 hover:text-accent transition-colors"><ExternalLinkIcon /></a>
+                                            </div>
+                                        </div>
+                                        
+                                        <h3 className="text-2xl font-bold text-slate-200 mb-3 group-hover:text-accent transition-colors">
+                                            {project.title}
+                                        </h3>
+                                        
+                                        <p className="text-slate-400 mb-6 flex-grow leading-relaxed">
+                                            {project.desc}
+                                        </p>
+                                        
+                                        <ul className="flex flex-wrap gap-3 font-mono text-xs text-slate-500">
+                                            {project.tags.map((tag, i) => (
+                                                <li key={i}>{tag}</li>
+                                            ))}
+                                        </ul>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </section>
+
+                    {/* Contact Section */}
+                    <section id="contact" className="py-32 relative text-center">
+                        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                            <p className="font-mono text-accent mb-4">04. What's Next?</p>
+                            <h2 className="text-4xl md:text-5xl font-bold text-slate-200 mb-6">Get In Touch</h2>
+                            <p className="text-slate-400 mb-10 text-lg leading-relaxed">
+                                Whether you have a question, a project idea, or just want to say hi, my inbox is always open. I'm currently looking for new opportunities and would love to hear from you.
+                            </p>
+                            
+                            <a href="mailto:soujan.d@jobmailoffer.com" className="inline-block px-8 py-4 border border-accent text-accent font-semibold rounded-full hover:bg-accent/10 transition-all text-lg">
+                                Say Hello
+                            </a>
+
+                            <div className="mt-16 flex items-center justify-center gap-6">
+                                <a href="tel:9092641860" className="flex items-center gap-2 text-slate-400 hover:text-accent transition-colors">
+                                    <PhoneIcon /> <span>909-264-1860</span>
+                                </a>
+                                <a href="mailto:soujan.d@jobmailoffer.com" className="flex items-center gap-2 text-slate-400 hover:text-accent transition-colors">
+                                    <MailIcon /> <span>Email Me</span>
+                                </a>
+                            </div>
+                        </div>
+                    </section>
+
+                    {/* Footer */}
+                    <footer className="py-6 text-center text-slate-500 font-mono text-sm border-t border-slate-800">
+                        <div className="max-w-7xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-4">
+                            <p>Designed & Built by Soujan Wuluvrna Dhanesh Kumar © {new Date().getFullYear()}</p>
+                            <div className="flex gap-4">
+                                <a href="#" className="hover:text-accent transition-colors"><GithubIcon /></a>
+                                <a href="#" className="hover:text-accent transition-colors"><LinkedinIcon /></a>
+                            </div>
+                        </div>
+                    </footer>
+                </div>
+            );
+        };
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>
